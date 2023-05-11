@@ -3,7 +3,6 @@ import { Grid, Form, Segment, Header, Button, Divider, Message } from 'semantic-
 import axios from 'axios';
 import 'semantic-ui-css/semantic.min.css';
 import Hospital_nav from './Hospital_nav';
-//import ipfs from '../../ipfs';
 import contract from '../../ethereum/web3';
 import Web3 from 'web3';
 const sha3 = require('js-sha3');
@@ -25,18 +24,11 @@ class ApproveDonor extends Component {
 
 
     onChange = event => {
-        console.log(event.target.value);
+
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    // captureFile = event => {
-    //     const file = event.target.files[0];
-    //     const reader = new window.FileReader();
-    //     reader.readAsArrayBuffer(file);
-    //     reader.onloadend = () => {
-    //         this.setState({ buffer: Buffer(reader.result) });
-    //     }
-    // }
+
 
     onApprove = (event) => {
         event.preventDefault();
@@ -53,7 +45,7 @@ class ApproveDonor extends Component {
                 const { gender, city, phone, email, organ, bloodgroup } = res.data;
 
                 const data = JSON.stringify({ fname, lname, gender, city, phone, email });
-                console.log(data);
+
                 var result = "563jhjh"
                 this.setState({ ipfsHash: result });
                 result = "435353";
@@ -104,14 +96,6 @@ class ApproveDonor extends Component {
             }).catch(err => this.setState({ errMsg: err.message }));
 
     }
-
-
-
-    // ...
-
-
-
-
 
     render() {
         return (
@@ -166,7 +150,7 @@ class ApproveDonor extends Component {
                                     required
                                 /> */}
                                 {
-                                    this.state.errMsg && this.state.errMsg === "Donor Approved !" ?
+                                    this.state.errMsg && this.state.errMsg.length > 0 ?
                                         <Message success header="Sucess" content={this.state.successMsg} /> : <Message error header="Oops!!" content={this.state.errMsg} />
                                 }
                                 <Segment basic textAlign={"center"}>

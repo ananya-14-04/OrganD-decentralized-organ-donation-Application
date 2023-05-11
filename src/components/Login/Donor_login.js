@@ -1,5 +1,4 @@
-import { Component, useState } from "react";
-import axios from "axios";
+import { Component } from "react";
 import Top2 from "../Navbar/Top2";
 import "./styles.css";
 import Web3 from "web3";
@@ -8,7 +7,6 @@ import "react-bootstrap";
 import './card.css';
 const sha3 = require('js-sha3');
 const { toChecksumAddress } = require('ethereumjs-util');
-
 
 
 
@@ -51,7 +49,6 @@ class Donor_login extends Component {
 
             // Get the user's account
             const accounts = await web3.eth.getAccounts();
-            const account = accounts[0];
 
             try {
                 contract.methods.getDonor(checksumAddress).call()
@@ -96,12 +93,14 @@ class Donor_login extends Component {
                             <div class="row gx-lg-5 align-items-center">
                                 <div class="col-lg-6 mb-5 mb-lg-0">
                                     <h1 class="my-5 display-3 fw-bold ls-tight">
-
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <span class="text-primary">Check Donor Info and Status</span>
                                     </h1>
                                     <p style={{ color: "hsl(217, 10%, 50.8%)" }}>
-                                        “After I die if I am buried I will rot. If I am burnt I will become ash but if my body is donated I will live to give life and happiness to many."
+                                        “I never used to pay that much attention to organ donation, but I’m tremendously glad for it: it turned out that I was one of the ones in need. I hope my donor’s family will be blessed a thousand times for their sacrifice.” –Karl Black
                                     </p>
+
                                 </div>
 
                                 <div class="col-lg-6 mb-5 mb-lg-0">
@@ -135,8 +134,8 @@ class Donor_login extends Component {
                             <div class="card-body">
                                 <h3 class="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>Organ Needed: {this.state.organ}</h3>
                                 <h3 class="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>Blood Group: {this.state.bloodgroup}</h3>
-                                <h3 class="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>Match Found: {this.state.matchfound == true ? `Yes` : `No`}</h3>
-                                <h3 class="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>Recipient ID: {this.state.matchfound == true ? `Recipient id: ${this.state.recipientId}` : ``}</h3>
+                                <h3 class="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>Match Found: {this.state.matchfound === true ? `Yes` : `No`}</h3>
+                                <h3 class="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>Recipient ID: {this.state.matchfound === true ? `Recipient id: ${this.state.recipientId}` : ``}</h3>
                             </div>
                         </div>
                     </div>

@@ -1,32 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { Card, Segment, Header, Divider, Grid } from 'semantic-ui-react';
+import { Card, Segment, Header, Divider, Grid, Form, Button } from 'semantic-ui-react';
+import Top2 from '../Navbar/Top2';
 
-function HospitalList(props) {
-    const [hospitals, setHospitals] = useState([]);
 
-    const { city } = useParams;
+class HospitalList extends Component {
+    state = {
+        hospitals: [],
+        city: '',
+    }
 
-    useEffect(() => {
-        axios.get(`http://localhost:5002/api/hospitals/${city}`)
+    oncheck = (event) => {
+        var hospitals = [];
+        axios.get(`http://localhost:5002/api/hospitals/${this.state.city}`)
             .then(res => {
-                const newHospitals = res.data.map(hospital => {
-                    return {
-                        address: `Address : ${hospital.address}`,
-                        city: hospital.city,
-                        name: hospital.username,
-                        contact: `Contact : ${hospital.contact}`,
-                        img: `../images/${hospital.img}`
+                for (let i = 0; i < res.data.length; i++) {
+                    const hospital = {
+                        address: `Address : ${res.data[i].address}`,
+                        city: res.data[i].city,
+                        name: res.data[i].username,
+
+                        img: `../../images/${res.data[i].img}`
                     }
-                });
-                setHospitals(newHospitals);
+                    hospitals.push(hospital)
+                }
+                console.log(hospitals);
+                this.setState({ hospitals });
             })
             .catch(err => console.log("Error:" + err));
-    }, [props.city]);
+    }
 
-    const renderHospitals = () => {
-        const hospitalCards = hospitals.map(hospital => {
+    renderHospitals() {
+        var hospitals = this.state.hospitals.map(hospital => {
             return {
                 image: hospital.img,
                 header: hospital.name,
@@ -34,22 +39,50 @@ function HospitalList(props) {
                 description: hospital.address
             };
         });
-        return <Card.Group items={hospitalCards} centered />;
+        return <Card.Group items={hospitals} centered />;
     }
 
-    return (
-        <Grid centered columns={2} style={{ marginTop: '20px' }}>
-            <Grid.Column width={12}>
-                <Segment>
-                    <Header as="h3" color="grey" style={{ textAlign: "center" }}>
-                        Please visit any one hospital from the given list, to get yourself approved!
-                    </Header>
-                    <Divider />
-                    {renderHospitals()}
-                </Segment>
-            </Grid.Column>
-        </Grid>
-    );
+    onChange = event => {
+        //console.log(event.target.value);
+        this.setState({ [event.target.name]: event.target.value });
+
+    }
+
+    render() {
+        return (
+            <>
+                <Top2 />
+                <Grid centered columns={2} style={{ marginTop: '60px' }}>
+                    <Grid.Column width={12}>
+                        <Segment>
+                            <Header as="h3" color="grey" style={{ textAlign: "center" }}>
+                                Please visit any one hospital from the given list, to get yourself approved! , Select a city to view the hospitals
+                            </Header>
+                            <Form onSubmit={this.oncheck}>
+                                <Form.Group width={1}>
+                                    <Form.Field
+                                        value={this.state.city}
+                                        onChange={this.onChange}
+                                        name="city"
+                                        label='City'
+                                        control='select'
+                                        required
+                                    >
+                                        <option value='Gwalior'>Gwalior</option>
+                                        <option value='New Delhi'>New Delhi</option>
+                                        <option value='Pune'>Pune</option>
+                                    </Form.Field>
+                                </Form.Group>
+                                <Button positive type='submit'>Check</Button>
+                            </Form>
+                            <Divider />
+                            {this.renderHospitals()}
+                        </Segment>
+                    </Grid.Column>
+                </Grid>
+            </>
+        );
+    }
 }
 
 export default HospitalList;

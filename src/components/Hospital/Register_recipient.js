@@ -2,19 +2,13 @@ import React, { Component } from 'react';
 import { Form, Button, Grid, Segment, Header, Divider, Message } from 'semantic-ui-react';
 import Hospital_nav from './Hospital_nav';
 import jwtDecode from 'jwt-decode';
-//import ipfs from '../../ipfs';
+
 import contract from '../../ethereum/web3';
 import Web3 from 'web3';
-//import client from '../../ipfs';
-//const ethUtil = require('ethereumjs-util');
+
 const sha3 = require('js-sha3');
 const { toChecksumAddress } = require('ethereumjs-util');
-//import client from '../../ipfs';
 
-//import EthCrypto from 'eth-crypto';
-
-// var ethers = require('ethers');
-// var crypto = require('crypto');
 
 class RegisterRecipient extends Component {
     state = {
@@ -61,16 +55,6 @@ class RegisterRecipient extends Component {
                 const data = JSON.stringify({ fname, lname, gender, city, phone, email });
 
                 const buf = Buffer.from(data);
-                //const buf = Buffer.from(data);
-
-                // var result = await client.files.add(buf);
-                // this.setState({ ipfsHash: result[0].hash });
-
-                // result = await client.files.add(buffer);
-                // this.setState({ EMRHash: result[0].hash });
-
-                //console.log(ipfsHash);
-                //console.log(EMRHash);
 
                 var result = "Qm1d4";
 
@@ -238,27 +222,11 @@ class RegisterRecipient extends Component {
                                         <option value='Heart'>Heart</option>
                                         <option value='Kidney'>Kidney</option>
                                         <option value='Liver'>Liver</option>
-                                        <option value='Longs'>Lungs</option>
+                                        <option value='Lungs'>Lungs</option>
                                         <option value='Pancreas'>Pancreas</option>
                                     </Form.Field>
                                 </Form.Group>
-                                <Form.Group widths={1}>
-                                    <Form.Input
-                                        value={this.state.publicKey}
-                                        onChange={this.onChange}
-                                        name="publicKey"
-                                        label="Recipient's Public Key (enter a 40 bit key)"
-                                        placeholder="Recipient's Public Key"
-                                        required
-                                    />
-                                    <Form.Input
-                                        // onChange={this.captureFile}
-                                        name="EMR"
-                                        label="EMR"
-                                        type="file"
-                                        required
-                                    />
-                                </Form.Group>
+
 
                                 <Message error header="Oops!" content={this.state.errMsg} />
                                 <Message success header="Success" content={this.state.successMsg} />

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import { NavLink } from "react-router-dom";
+//import TransplantMatch from "./transplant-match";
 
 
 
@@ -52,20 +53,12 @@ function Hospital_nav() {
                             <NavLink to='/RegisterRecipient'>Register Recipient</NavLink>
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="Patient list">
-                        <NavIcon>
-                            <NavLink to='/Patient_list'><i className="fa fa-fw fa-th-list" style={{ fontSize: '1.75em' }} /></NavLink>
-                        </NavIcon>
-                        <NavText>
-                            <NavLink to='/Patient_list'>Patient EMR</NavLink>
-                        </NavText>
-                    </NavItem>
                     <NavItem eventKey="Transplant Match">
                         <NavIcon>
                             <i className="fa fa-fw fa-key" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
-                            <NavLink to='/Patient_list'>Transplant Match</NavLink>
+                            <NavLink to='/Transplant_match'>Transplant Match</NavLink>
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="Logout">

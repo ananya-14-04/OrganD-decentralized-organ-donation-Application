@@ -25,11 +25,11 @@ const Top = () => {
                 <Nav className="me-auto trans">
                     <Link to="#about" className=' trans nav-link nav-link-ltr' smooth>About Us</Link>
                     <Link to="#success" className='trans nav-link nav-link-ltr' smooth>Success Stories</Link>
-                    <Link className='trans nav-link nav-link-ltr'>Partner with us</Link>
+                    <Link to="#Partner" className='trans nav-link nav-link-ltr'>Partner with us</Link>
 
                 </Nav>
                 <Nav className='trans'>
-                    <Link to="/Login" className='buttn nav-link' href="#pricing"> Login/Signup</Link>
+                    <Link to="/Donor_login" className='buttn nav-link' href="#pricing"> Login/Signup</Link>
                 </Nav>
             </Container>
         </Navbar>
